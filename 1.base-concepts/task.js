@@ -19,12 +19,16 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 	let totalAmount;
 	let S = amount - contribution;
 	let P = percent / 100 / 12;
+
+
 	let dateFrom = new Date();
 	let fullMonthsDataTo = date.getFullYear() * 12;
 	let fullMonthsDataFrom = dateFrom.getFullYear() * 12;
 	let n = fullMonthsDataTo - fullMonthsDataFrom;
 	let payment = S * (P + (P / (((1 + P) ** n) - 1)));
 	totalAmount = (payment * n).toFixed(2);
+
+  
 	return totalAmount;
 }
 
