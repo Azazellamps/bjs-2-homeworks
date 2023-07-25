@@ -15,20 +15,19 @@ function solveEquation(a, b, c) {
 	return arr;
 }
 
-function calculateTotalMortgage(percent, contribution, amount, date) {
-	let totalAmount;
-	let S = amount - contribution;
-	let P = percent / 100 / 12;
+function calculateTotalMortgage(percent, contribution, amount, countMonths) {
+  if (isNaN(percent) || isNaN(contribution) || isNaN(amount) || isNaN(countMonths)){
+    return false;
+  }
 
+  percent = percent/100/12;
 
-	let dateFrom = new Date();
-	let fullMonthsDataTo = date.getFullYear() * 12;
-	let fullMonthsDataFrom = dateFrom.getFullYear() * 12;
-	let n = fullMonthsDataTo - fullMonthsDataFrom;
-	let payment = S * (P + (P / (((1 + P) ** n) - 1)));
-	totalAmount = (payment * n).toFixed(2);
+  let loanBody = amount - contribution;
+  let monthlyPayment = loanBody * (percent + (percent / ((Math.pow((1 + percent), countMonths)) - 1)));
+  let totalPayment = monthlyPayment * countMonths;
 
-  
-	return totalAmount;
+  totalPayment = Number(totalPayment.toFixed(2));
+
+  return totalPayment;
 }
 
